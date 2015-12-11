@@ -107,7 +107,8 @@ Scope(_SB)
 		Name (_DSD, Package () {
 			ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
 			Package () {
-				Package () {"local-mac-address", Package () { 0, 0, 0, 0, 0, 0 }}, // 6-bytes
+				// Use explict hexdecimal number to build ByteConst data correctly
+				Package () {"local-mac-address", Package () {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}}, // 6-bytes
 				Package () {"ae-name", "dsaf0"},
 				Package () {"port-id", 7},
 			}
@@ -119,7 +120,8 @@ Scope(_SB)
 		Name (_DSD, Package () {
 			ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
 			Package () {
-				Package () {"local-mac-address", Package () { 0, 0, 0, 0, 0, 0 }}, // 6-bytes
+				// Use explict hexdecimal number to build ByteConst data correctly
+				Package () {"local-mac-address", Package () {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}}, // 6-bytes
 				Package () {"ae-name", "dsaf0"},
 				Package () {"port-id", 6},
 			}
@@ -131,7 +133,8 @@ Scope(_SB)
 		Name (_DSD, Package () {
 			ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
 			Package () {
-				Package () {"local-mac-address", Package () { 0, 0, 0, 0, 0, 0 }}, // 6-bytes
+				// Use explict hexdecimal number to build ByteConst data correctly
+				Package () {"local-mac-address", Package () {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}}, // 6-bytes
 				Package () {"ae-name", "dsaf0"},
 				Package () {"port-id", 2},
 			}
@@ -143,7 +146,8 @@ Scope(_SB)
 		Name (_DSD, Package () {
 			ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
 			Package () {
-				Package () {"local-mac-address", Package () { 0, 0, 0, 0, 0, 0 }}, // 6-bytes
+				// Use explict hexdecimal number to build ByteConst data correctly
+				Package () {"local-mac-address", Package () {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}}, // 6-bytes
 				Package () {"ae-name", "dsaf0"},
 				Package () {"port-id", 3},
 			}

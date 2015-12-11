@@ -428,6 +428,7 @@
   MdeModulePkg/Universal/Acpi/AcpiTableDxe/AcpiTableDxe.inf
 
   OpenPlatformPkg/Chips/Hisilicon/Pv660/Pv660AcpiTables/AcpiTables.inf
+  OpenPlatformPkg/Chips/Hisilicon/Drivers/AcpiPlatformDxe/AcpiPlatformDxe.inf
 
   #Pci Express
   #OpenPlatformPkg/Chips/Hisilicon/Override/UefiCpuPkg/CpuIo2Dxe/CpuIo2Dxe.inf
