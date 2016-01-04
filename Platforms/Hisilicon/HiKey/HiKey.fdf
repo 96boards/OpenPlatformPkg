@@ -116,16 +116,26 @@ READ_LOCK_STATUS   = TRUE
   # GPIO
   #
   INF ArmPlatformPkg/Drivers/PL061GpioDxe/PL061GpioDxe.inf
+  INF OpenPlatformPkg/Platforms/Hisilicon/HiKey/HiKeyGpio/HiKeyGpio.inf
 
   #
   # Multimedia Card Interface
   #
   INF EmbeddedPkg/Universal/MmcDxe/MmcDxe.inf
+  INF OpenPlatformPkg/Drivers/Mmc/DwEmmcDxe/DwEmmcDxe.inf
+  INF OpenPlatformPkg/Drivers/Mmc/DwSdDxe/DwSdDxe.inf
 
   #
   # USB
   #
   INF EmbeddedPkg/Drivers/AndroidFastbootTransportUsbDxe/FastbootTransportUsbDxe.inf
+  INF OpenPlatformPkg/Drivers/Usb/DwUsbDxe/DwUsbDxe.inf
+
+  #
+  # Fastboot
+  #
+  INF EmbeddedPkg/Application/AndroidFastboot/AndroidFastbootApp.inf
+  INF OpenPlatformPkg/Platforms/Hisilicon/HiKey/HiKeyFastbootDxe/HiKeyFastbootDxe.inf
 
   #
   # FAT filesystem + GPT/MBR partitioning
@@ -135,8 +145,9 @@ READ_LOCK_STATUS   = TRUE
   INF FatBinPkg/EnhancedFatDxe/Fat.inf
   INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
 
-  INF MdeModulePkg/Universal/Variable/EmuRuntimeDxe/EmuVariableRuntimeDxe.inf
   INF MdeModulePkg/Universal/FaultTolerantWriteDxe/FaultTolerantWriteDxe.inf
+  INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
+  INF OpenPlatformPkg/Drivers/Variable/BlockVariableDxe/BlockVariableDxe.inf
 
   INF MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
 
@@ -150,6 +161,16 @@ READ_LOCK_STATUS   = TRUE
   #
   INF MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
   INF ArmPlatformPkg/Bds/Bds.inf
+
+  #
+  # Legacy Linux Loader
+  #
+  INF ArmPkg/Application/LinuxLoader/LinuxLoader.inf
+
+  #
+  # HiKey Platform
+  #
+  INF OpenPlatformPkg/Platforms/Hisilicon/HiKey/HiKeyDxe/HiKeyDxe.inf
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8

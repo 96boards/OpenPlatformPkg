@@ -136,7 +136,7 @@
   ReportStatusCodeLib|IntelFrameworkModulePkg/Library/DxeReportStatusCodeLibFramework/DxeReportStatusCodeLib.inf
 
 [BuildOptions]
-  GCC:*_*_*_PLATFORM_FLAGS == -I$(WORKSPACE)/MdeModulePkg/Include -I$(WORKSPACE)/OpenPlatformPkg/Platforms/Hisilicon/HiKey/Include
+  GCC:*_*_*_PLATFORM_FLAGS == -I$(WORKSPACE)/MdeModulePkg/Include -I$(WORKSPACE)/OpenPlatformPkg/Include -I$(WORKSPACE)/OpenPlatformPkg/Chips/Hisilicon/Hi6220/Include -I$(WORKSPACE)/OpenPlatformPkg/Platforms/Hisilicon/HiKey/Include
 
 [BuildOptions.common.EDKII.DXE_RUNTIME_DRIVER]
   GCC:*_*_ARM_DLINK_FLAGS = -z common-page-size=0x1000
@@ -253,6 +253,20 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"Alpha"
   gEmbeddedTokenSpaceGuid.PcdEmbeddedPrompt|"HiKey"
 
+  #
+  # NV Storage PCDs.
+  #
+  gBlockVariableDxeTokenSpaceGuid.PcdNvStorageVariableBlockCount|0x00001000
+  gBlockVariableDxeTokenSpaceGuid.PcdNvStorageVariableBlockSize|0x00000200
+  gBlockVariableDxeTokenSpaceGuid.PcdNvStorageVariableBlockLba|0x00006000
+  gBlockVariableDxeTokenSpaceGuid.PcdNvStorageVariableBlockDevicePath|L"VenHw(B549F005-4BD4-4020-A0CB-06F42BDA68C3)/HD(5,GPT,00354BCD-BBCB-4CB3-B5AE-CDEFCB5DAC43)"
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase|0x30000000
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableSize|0x00010000
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase|0x30010000
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize|0x00010000
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase|0x30020000
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize|0x00010000
+
   # System Memory (1GB)
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x00000000
   gArmTokenSpaceGuid.PcdSystemMemorySize|0x3E000000
@@ -288,13 +302,6 @@
   gArmTokenSpaceGuid.PcdGicDistributorBase|0xF6801000
   gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase|0xF6802000
 
-  #
-  # ARM OS Loader
-  #
-  gArmPlatformTokenSpaceGuid.PcdDefaultBootDescription|L"Linux from eMMC"
-  gArmPlatformTokenSpaceGuid.PcdDefaultBootDevicePath|L"VenHw(B549F005-4BD4-4020-A0CB-06F42BDA68C3)/HD(6,GPT,5C0F213C-17E1-4149-88C8-8B50FB4EC70E,0x7000,0x20000)/Image"
-  gArmPlatformTokenSpaceGuid.PcdDefaultBootArgument|L"dtb=hi6220-hikey.dtb console=ttyAMA3,115200 earlycon=pl011,0xf7113000 root=/dev/disk/by-partlabel/system rw rootwait efi=noruntime"
-
   # Use the serial console (ConIn & ConOut) and the Graphic driver (ConOut)
   gArmPlatformTokenSpaceGuid.PcdDefaultConOutPaths|L"VenHw(D3987D4B-971A-435F-8CAF-4967EB627241)/Uart(115200,8,N,1)/VenPcAnsi();VenHw(CE660500-824D-11E0-AC72-0002A5D5C51B)"
   gArmPlatformTokenSpaceGuid.PcdDefaultConInPaths|L"VenHw(D3987D4B-971A-435F-8CAF-4967EB627241)/Uart(115200,8,N,1)/VenPcAnsi()"
@@ -307,6 +314,27 @@
   gEmbeddedTokenSpaceGuid.PcdMetronomeTickPeriod|1000
   gEmbeddedTokenSpaceGuid.PcdTimerPeriod|10000
   gEmbeddedTokenSpaceGuid.PcdTimerPeriod|10000 # expressed in 100ns units, 10,000 x 100 ns = 1,000,000 ns = 1 ms
+
+  #
+  # DW MMC/SD card controller
+  #
+  gDwEmmcDxeTokenSpaceGuid.PcdDwEmmcDxeBaseAddress|0xF723D000
+  gDwEmmcDxeTokenSpaceGuid.PcdDwEmmcDxeClockFrequencyInHz|100000000
+  gDwSdDxeTokenSpaceGuid.PcdDwSdDxeBaseAddress|0xF723E000
+  gDwSdDxeTokenSpaceGuid.PcdDwSdDxeClockFrequencyInHz|24000000
+
+  #
+  # DW USB controller
+  #
+  gDwUsbDxeTokenSpaceGuid.PcdDwUsbDxeBaseAddress|0xF72C0000
+
+  #
+  # Fastboot
+  #
+  gEmbeddedTokenSpaceGuid.PcdAndroidFastbootUsbVendorId|0x18d1
+  gEmbeddedTokenSpaceGuid.PcdAndroidFastbootUsbProductId|0xd00d
+  gHiKeyTokenSpaceGuid.PcdAndroidFastbootNvmDevicePath|L"VenHw(b549f005-4bd4-4020-a0cb-06f42bda68c3)"
+  gHiKeyTokenSpaceGuid.PcdArmFastbootFlashLimit|"524288000"
 
 [PcdsDynamicDefault.common]
   #
@@ -354,8 +382,15 @@
   MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
   MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
 
-  MdeModulePkg/Universal/Variable/EmuRuntimeDxe/EmuVariableRuntimeDxe.inf
   MdeModulePkg/Universal/FaultTolerantWriteDxe/FaultTolerantWriteDxe.inf
+  MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf {
+    <LibraryClasses>
+      AuthVariableLib|MdeModulePkg/Library/AuthVariableLibNull/AuthVariableLibNull.inf
+      TpmMeasurementLib|MdeModulePkg/Library/TpmMeasurementLibNull/TpmMeasurementLibNull.inf
+      VarCheckLib|MdeModulePkg/Library/VarCheckLib/VarCheckLib.inf
+      NULL|MdeModulePkg/Library/VarCheckUefiLib/VarCheckUefiLib.inf
+  }
+  OpenPlatformPkg/Drivers/Variable/BlockVariableDxe/BlockVariableDxe.inf
 
   MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
 
@@ -368,21 +403,26 @@
   # GPIO
   #
   ArmPlatformPkg/Drivers/PL061GpioDxe/PL061GpioDxe.inf
+  OpenPlatformPkg/Platforms/Hisilicon/HiKey/HiKeyGpio/HiKeyGpio.inf
 
   #
   # MMC/SD
   #
   EmbeddedPkg/Universal/MmcDxe/MmcDxe.inf
+  OpenPlatformPkg/Drivers/Mmc/DwEmmcDxe/DwEmmcDxe.inf
+  OpenPlatformPkg/Drivers/Mmc/DwSdDxe/DwSdDxe.inf
 
   #
   # USB
   #
   EmbeddedPkg/Drivers/AndroidFastbootTransportUsbDxe/FastbootTransportUsbDxe.inf
+  OpenPlatformPkg/Drivers/Usb/DwUsbDxe/DwUsbDxe.inf
 
   #
   # Fastboot
   #
   EmbeddedPkg/Application/AndroidFastboot/AndroidFastbootApp.inf
+  OpenPlatformPkg/Platforms/Hisilicon/HiKey/HiKeyFastbootDxe/HiKeyFastbootDxe.inf
 
   #
   # FAT filesystem + GPT/MBR partitioning
@@ -396,3 +436,18 @@
   #
   MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
   ArmPlatformPkg/Bds/Bds.inf
+
+  #
+  # Legacy Linux Loader
+  #
+  ArmPkg/Application/LinuxLoader/LinuxLoader.inf {
+    <LibraryClasses>
+      FileHandleLib|MdePkg/Library/UefiFileHandleLib/UefiFileHandleLib.inf
+      ShellLib|ShellPkg/Library/UefiShellLib/UefiShellLib.inf
+      SortLib|MdeModulePkg/Library/UefiSortLib/UefiSortLib.inf
+  }
+
+  #
+  # HiKey Platform
+  #
+  OpenPlatformPkg/Platforms/Hisilicon/HiKey/HiKeyDxe/HiKeyDxe.inf
