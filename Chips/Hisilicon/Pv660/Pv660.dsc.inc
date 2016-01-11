@@ -51,9 +51,9 @@
   UefiRuntimeLib|MdePkg/Library/UefiRuntimeLib/UefiRuntimeLib.inf
   OemHookStatusCodeLib|MdeModulePkg/Library/OemHookStatusCodeLibNull/OemHookStatusCodeLibNull.inf
   #
-  # Assume everything is fixed at build
+  # Allow dynamic PCDs
   #
-  PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
+  PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
 
   # 1/123 faster than Stm or Vstm version
   #BaseMemoryLib|MdePkg/Library/BaseMemoryLib/BaseMemoryLib.inf
@@ -156,6 +156,7 @@
   ArmTrustedMonitorLib|ArmPlatformPkg/Library/ArmTrustedMonitorLibNull/ArmTrustedMonitorLibNull.inf
 
   ArmGicArchLib|ArmPkg/Library/ArmGicArchSecLib/ArmGicArchSecLib.inf
+  PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
 
 [LibraryClasses.common.PEI_CORE]
   HobLib|MdePkg/Library/PeiHobLib/PeiHobLib.inf
@@ -170,6 +171,7 @@
   ExtractGuidedSectionLib|MdePkg/Library/PeiExtractGuidedSectionLib/PeiExtractGuidedSectionLib.inf
 
   PeiServicesTablePointerLib|ArmPkg/Library/PeiServicesTablePointerLib/PeiServicesTablePointerLib.inf
+  PcdLib|MdePkg/Library/PeiPcdLib/PeiPcdLib.inf
 
 [LibraryClasses.common.PEIM]
   HobLib|MdePkg/Library/PeiHobLib/PeiHobLib.inf
@@ -188,6 +190,7 @@
 
   ## Fixed compile error after upgrade to 14.10
   PlatformPeiLib|ArmPlatformPkg/PlatformPei/PlatformPeiLib.inf
+  PcdLib|MdePkg/Library/PeiPcdLib/PeiPcdLib.inf
 
 [LibraryClasses.common.DXE_CORE]
   HobLib|MdePkg/Library/DxeCoreHobLib/DxeCoreHobLib.inf

@@ -338,11 +338,7 @@
 !else
   ArmPlatformPkg/PrePeiCore/PrePeiCoreMPCore.inf
   MdeModulePkg/Core/Pei/PeiMain.inf
-  MdeModulePkg/Universal/PCD/Pei/Pcd.inf  {
-    <LibraryClasses>
-      PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
-  }
-  
+  MdeModulePkg/Universal/PCD/Pei/Pcd.inf
   ArmPlatformPkg/PlatformPei/PlatformPeim.inf
   #ArmPlatformPkg/MemoryInitPei/MemoryInitPeim.inf
   #OpenPlatformPkg/Chips/Hisilicon/Override/ArmPlatformPkg/MemoryInitPei/MemoryInitPeim.inf
@@ -364,9 +360,9 @@
   #
   MdeModulePkg/Core/Dxe/DxeMain.inf {
     <LibraryClasses>
-      PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
       NULL|MdeModulePkg/Library/DxeCrc32GuidedSectionExtractLib/DxeCrc32GuidedSectionExtractLib.inf
   }
+  MdeModulePkg/Universal/PCD/Dxe/Pcd.inf
 
   OpenPlatformPkg/Chips/Hisilicon/Drivers/IoInitDxe/IoInitDxe.inf
 
