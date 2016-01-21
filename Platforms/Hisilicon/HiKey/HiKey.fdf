@@ -126,7 +126,18 @@ READ_LOCK_STATUS   = TRUE
   INF OpenPlatformPkg/Drivers/Mmc/DwSdDxe/DwSdDxe.inf
 
   #
-  # USB
+  # USB Host Support
+  #
+  INF OpenPlatformPkg/Drivers/Usb/DwUsbHostDxe/DwUsbHostDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+
+  #
+  # USB Mass Storage Support
+  #
+  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+
+  #
+  # USB Peripheral Support
   #
   INF EmbeddedPkg/Drivers/AndroidFastbootTransportUsbDxe/FastbootTransportUsbDxe.inf
   INF OpenPlatformPkg/Drivers/Usb/DwUsbDxe/DwUsbDxe.inf

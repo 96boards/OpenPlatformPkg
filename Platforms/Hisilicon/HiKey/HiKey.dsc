@@ -93,6 +93,7 @@
 
   # USB Requirements
   UefiUsbLib|MdePkg/Library/UefiUsbLib/UefiUsbLib.inf
+  DmaLib|ArmPkg/Library/ArmDmaLib/ArmDmaLib.inf
 
   UncachedMemoryAllocationLib|ArmPkg/Library/UncachedMemoryAllocationLib/UncachedMemoryAllocationLib.inf
 
@@ -413,7 +414,18 @@
   OpenPlatformPkg/Drivers/Mmc/DwSdDxe/DwSdDxe.inf
 
   #
-  # USB
+  # USB Host Support
+  #
+  OpenPlatformPkg/Drivers/Usb/DwUsbHostDxe/DwUsbHostDxe.inf
+  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+
+  #
+  # USB Mass Storage Support
+  #
+  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+
+  #
+  # USB Peripheral Support
   #
   EmbeddedPkg/Drivers/AndroidFastbootTransportUsbDxe/FastbootTransportUsbDxe.inf
   OpenPlatformPkg/Drivers/Usb/DwUsbDxe/DwUsbDxe.inf
