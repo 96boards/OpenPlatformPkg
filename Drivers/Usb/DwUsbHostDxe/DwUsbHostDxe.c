@@ -15,6 +15,8 @@
 #include "DwUsbHostDxe.h"
 #include "DwcHw.h"
 
+#define USB_TYPE_LENGTH              16
+
 EFI_USB_PCIIO_DEVICE_PATH DwHcDevicePath =
 {
   {
@@ -262,8 +264,25 @@ DwHcReset (
   )
 {
 	DWUSB_OTGHC_DEV	*DwHc;
+	UINTN           VariableSize;
+	CHAR16          UsbType[USB_TYPE_LENGTH];
+
 
 	DwHc = DWHC_FROM_THIS (This);
+
+	VariableSize = USB_TYPE_LENGTH * sizeof (CHAR16);
+	gRT->GetVariable (
+                (CHAR16 *)L"DwUsbType",
+                &gDwUsbTypeVariableGuid,
+                NULL,
+                &VariableSize,
+                &UsbType
+          );
+
+	if (StrCmp(UsbType, (const CHAR16 *)L"host")) {
+		DEBUG ((EFI_D_ERROR, "USB is not in HOST mode\n"));
+		return EFI_DEVICE_ERROR;
+	}
 
         DwCoreInit(DwHc);
         DwHcInit(DwHc);

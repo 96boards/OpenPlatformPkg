@@ -46,6 +46,7 @@
 
 [Guids]
   gEfiEventExitBootServicesGuid
+  gDwUsbTypeVariableGuid
 
 [Protocols]
   gEfiDriverBindingProtocolGuid
