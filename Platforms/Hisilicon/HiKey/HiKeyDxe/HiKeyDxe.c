@@ -185,6 +185,30 @@ DW_USB_PROTOCOL mDwUsbDevice = {
 
 EFI_STATUS
 EFIAPI
+HiKeySetUsbType (
+  VOID
+  )
+{
+  EFI_STATUS            Status;
+  UINTN                 VariableSize;
+  CHAR16                DefaultUsbType[USB_TYPE_LENGTH] = L"device";
+
+  VariableSize = USB_TYPE_LENGTH * sizeof (CHAR16);
+  Status = gRT->SetVariable (
+                  (CHAR16*)L"DwUsbType",
+                  &gDwUsbTypeVariableGuid,
+                  EFI_VARIABLE_NON_VOLATILE       |
+                  EFI_VARIABLE_BOOTSERVICE_ACCESS |
+                  EFI_VARIABLE_RUNTIME_ACCESS,
+                  VariableSize,
+                  DefaultUsbType
+                  );
+
+  return Status;
+}
+
+EFI_STATUS
+EFIAPI
 HiKeyEntryPoint (
   IN EFI_HANDLE         ImageHandle,
   IN EFI_SYSTEM_TABLE   *SystemTable
@@ -204,6 +228,7 @@ HiKeyEntryPoint (
 
   HiKeyInitSerialNo ();
   HiKeyInitBootDevice ();
+  HiKeySetUsbType ();
   HiKeyInitPeripherals ();
 
   Status = HiKeyBootMenuInstall ();
