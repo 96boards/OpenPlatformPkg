@@ -23,6 +23,7 @@
 #include <Library/UefiBootServicesTableLib.h>
 
 #define BOOT_DEVICE_LENGTH       16
+#define USB_TYPE_LENGTH          16
 
 EFI_STATUS
 HiKeyFdtInstall (
