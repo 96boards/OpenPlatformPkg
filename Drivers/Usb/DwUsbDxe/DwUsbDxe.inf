@@ -34,6 +34,9 @@
   UncachedMemoryAllocationLib
   CacheMaintenanceLib
 
+[Guids]
+  gDwUsbTypeVariableGuid
+
 [Protocols]
   gEfiDriverBindingProtocolGuid
   gUsbDeviceProtocolGuid
