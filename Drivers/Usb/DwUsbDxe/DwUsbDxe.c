@@ -40,6 +40,7 @@ STATIC UINTN mNumDataBytes;
 
 STATIC DW_USB_PROTOCOL          *mSerialNo;
 
+#define USB_TYPE_LENGTH		     16
 #define USB_BLOCK_HIGH_SPEED_SIZE    512
 #define DATA_SIZE 32768
 #define CMD_SIZE 512
@@ -669,11 +670,27 @@ DwUsbStart (
   UINT8                    *Ptr;
   EFI_STATUS                Status;
   EFI_EVENT                 TimerEvent;
+  UINTN                     VariableSize;
+  CHAR16                    UsbType[USB_TYPE_LENGTH];
 
   ASSERT (DeviceDescriptor != NULL);
   ASSERT (Descriptors[0] != NULL);
   ASSERT (RxCallback != NULL);
   ASSERT (TxCallback != NULL);
+
+  VariableSize = USB_TYPE_LENGTH * sizeof (CHAR16);
+  Status = gRT->GetVariable (
+                (CHAR16 *)L"DwUsbType",
+                &gDwUsbTypeVariableGuid,
+                NULL,
+                &VariableSize,
+                &UsbType
+          );
+
+  if (StrCmp(UsbType, (const CHAR16 *)L"device")) {
+      DEBUG ((EFI_D_ERROR, "USB is not in DEVICE mode\n"));
+      return EFI_DEVICE_ERROR;
+  }
 
   usb_init();
 
